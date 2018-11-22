@@ -1,0 +1,55 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+from alpha_vantage.timeseries import TimeSeries
+
+ts = TimeSeries(key='XH1LYP75112RZOUM', output_format='pandas')
+data, meta_data = ts.get_intraday(symbol='AMZN',interval='1min', outputsize='full')
+X1=data.iloc[:,3]
+
+ts = TimeSeries(key='XH1LYP75112RZOUM', output_format='pandas')
+data, meta_data = ts.get_intraday(symbol='MSFT',interval='1min', outputsize='full')
+X2=data.iloc[:,3]
+
+ts = TimeSeries(key='XH1LYP75112RZOUM', output_format='pandas')
+data, meta_data = ts.get_intraday(symbol='GOOGL',interval='1min', outputsize='full')
+X3=data.iloc[:,3]
+
+ts = TimeSeries(key='XH1LYP75112RZOUM', output_format='pandas')
+data, meta_data = ts.get_intraday(symbol='TSLA',interval='1min', outputsize='full')
+X4=data.iloc[:,3]
+
+
+plt.axis([0,2000 , min(X1)-1, max(X1)+1])
+#plt.figure(figsize=(5,5))
+
+i=0
+for i in range(2000):
+    temp_y1 = X1[i]
+    plt.subplot(2, 2, 1)
+    plt.scatter(i, temp_y1)
+    plt.title('Amazon')
+
+
+    temp_y2 = X2[i]
+    plt.subplot(2, 2, 2)
+    plt.scatter(i, temp_y2)
+    plt.title('Microsoft')
+
+
+    temp_y3 = X3[i]
+    plt.subplot(2, 2, 3)
+    plt.scatter(i, temp_y3)
+    plt.title('Google')
+
+    temp_y4 = X4[i]
+    plt.subplot(2, 2, 4)
+    plt.scatter(i, temp_y4)
+    plt.title('Tesla')
+
+    plt.pause(1)
+
+
+plt.show()

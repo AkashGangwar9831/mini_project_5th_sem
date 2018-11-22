@@ -1,0 +1,27 @@
+from pandas_datareader import data as pdr
+
+import fix_yahoo_finance as yf
+import matplotlib.pyplot as plt
+#yf.pdr_override()
+
+data_a = pdr.get_data_yahoo("NVDA", start="2016-10-26", end="2018-12-22")
+
+data_b = pdr.get_data_yahoo("AMD", start="2016-10-26", end="2018-11-22")
+
+
+
+plt.figure(figsize=(10,10))
+
+plt.subplot(2,1,1)
+plt.plot(data_a.iloc[:,3],color="orange")
+plt.title('Nvidia')
+plt.xlabel("Time")
+plt.ylabel("Price $")
+
+plt.subplot(2,1,2)
+plt.plot(data_b.iloc[:,3],color="blue")
+plt.title('AMD')
+plt.xlabel("Time")
+plt.ylabel("Price $")
+
+plt.show()
